@@ -1,0 +1,299 @@
+/*
+  moratine.app
+
+  Cream page, Fraunces for the wordmark and the two gradient card figures
+  only, Plex Mono for eyebrows and data, Inter for everything else. Same
+  lineage as commuted.app and reckonry.app.
+
+  No analytics. The privacy policy says the site collects nothing, so keep
+  it that way.
+*/
+
+:root {
+  --cream: #f8f5f0;
+  --card: #ffffff;
+  --ink: #1a1715;
+  --ink-soft: #55504a;
+  --ink-faint: #8a8078;
+  --rule: #e6e0d6;
+
+  /* The waiting room arc, matching the app */
+  --mist-top: #9fb2be;
+  --mist-bottom: #c4d2da;
+  --ochre-top: #a8863b;
+  --ochre-bottom: #cba95f;
+  --umber-top: #7e5228;
+  --accent: #6a4520;
+
+  --measure: 34rem;
+  --page: 62rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ---------- Masthead ---------- */
+
+.masthead {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2.25rem 0 0;
+}
+
+.masthead img {
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+}
+
+.wordmark {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  padding: 5rem 0 3.5rem;
+  max-width: var(--measure);
+}
+
+.eyebrow {
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 1.25rem;
+}
+
+h1 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.5rem;
+}
+
+.lede {
+  font-size: 1.18rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0 0 2rem;
+}
+
+.lede strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ---------- Cards ---------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+  margin: 0 0 4.5rem;
+}
+
+.card {
+  border-radius: 16px;
+  padding: 1.6rem 1.5rem 1.5rem;
+  min-height: 11rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.card .eyebrow { margin-bottom: auto; }
+
+.card .figure {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 2.5rem;
+  line-height: 1;
+  margin: 0 0 0.35rem;
+}
+
+.card .note {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.card--ochre {
+  background: linear-gradient(135deg, var(--ochre-top), var(--ochre-bottom));
+  color: rgba(0, 0, 0, 0.85);
+}
+.card--ochre .eyebrow,
+.card--ochre .note { color: rgba(0, 0, 0, 0.62); }
+
+.card--mist {
+  background: linear-gradient(135deg, var(--mist-top), var(--mist-bottom));
+  color: rgba(0, 0, 0, 0.85);
+}
+.card--mist .eyebrow,
+.card--mist .note { color: rgba(0, 0, 0, 0.62); }
+
+/* ---------- Sections ---------- */
+
+section { padding: 0 0 4rem; }
+
+h2 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+  line-height: 1.2;
+  margin: 0 0 1rem;
+}
+
+h3 {
+  font-size: 1.02rem;
+  font-weight: 600;
+  margin: 2rem 0 0.5rem;
+}
+
+p { max-width: var(--measure); margin: 0 0 1.1rem; }
+
+.prose { color: var(--ink-soft); }
+.prose strong { color: var(--ink); font-weight: 500; }
+
+ul { max-width: var(--measure); padding-left: 1.1rem; color: var(--ink-soft); }
+li { margin-bottom: 0.5rem; }
+
+a { color: var(--accent); text-underline-offset: 2px; }
+a:hover { text-decoration-thickness: 2px; }
+
+/* ---------- Screenshots ---------- */
+
+.shots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 1.25rem;
+  margin: 0 0 1rem;
+}
+
+.shots img {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: 0 2px 18px rgba(26, 23, 21, 0.09);
+  display: block;
+}
+
+.shots--watch {
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  max-width: 34rem;
+}
+
+.shots--watch img { border-radius: 22px; }
+
+/* ---------- Refusals ---------- */
+
+.refusals {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 2rem 0;
+  margin: 0 0 4rem;
+}
+
+.refusals ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  columns: 2;
+  column-gap: 2.5rem;
+  max-width: 44rem;
+}
+
+.refusals li {
+  break-inside: avoid;
+  padding-left: 1.4rem;
+  position: relative;
+  color: var(--ink-soft);
+}
+
+.refusals li::before {
+  content: '\00d7';
+  position: absolute;
+  left: 0;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 32rem) {
+  .refusals ul { columns: 1; }
+}
+
+/* ---------- Buttons ---------- */
+
+.cta {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--ochre-top), var(--ochre-bottom));
+  color: rgba(0, 0, 0, 0.85);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.85rem 1.6rem;
+  border-radius: 12px;
+}
+
+.cta:hover { opacity: 0.92; }
+
+.price {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+  margin-left: 0.9rem;
+}
+
+/* ---------- Footer ---------- */
+
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 2.25rem 0 3.5rem;
+  font-size: 0.9rem;
+  color: var(--ink-faint);
+}
+
+footer a { color: var(--ink-soft); }
+
+footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 0.9rem;
+}
+
+/* ---------- Legal pages ---------- */
+
+.legal { padding: 3.5rem 0 1rem; max-width: var(--measure); }
+.legal h1 { font-size: clamp(2rem, 5vw, 2.6rem); }
+.legal .updated {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 2.5rem;
+}
