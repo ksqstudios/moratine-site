@@ -1,33 +1,595 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Moratine, a record of time you did not choose</title>
-<meta name="description" content="Moratine records involuntary waiting: on hold, in line, in waiting rooms. One tap in, one tap out, and a ledger of who is costing you time.">
-
-<link rel="canonical" href="https://moratine.app/">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://moratine.app/">
-<meta property="og:title" content="Moratine, a record of time you did not choose">
-<meta property="og:description" content="Two hours twenty-two minutes on hold with your insurer, across six calls. A bare total is a mood. A name attached to it is evidence.">
-<meta property="og:image" content="https://moratine.app/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#dde3e0">
-
-<link rel="icon" href="/favicon.png" sizes="32x32">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Moratine Site Pilot</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css">
-</head>
-<body>
+<style>
+/*
+  moratine.app
+
+  The waiting room. A pale institutional wall, a take-a-number ticket that
+  counts the reader's own wait, a posted notice, a ledger like a fee
+  schedule. Overpass (from the Highway Gothic signage lineage) is the only
+  typeface. Colors come from the app's stage arc: mist, slate, ochre, umber.
+
+  No analytics. The privacy policy says the site collects nothing, so keep
+  it that way.
+*/
+
+:root {
+  --wall: #dde3e0;
+  --wall-deep: #cfd7d3;
+  --ticket: #e8cd85;
+  --ticket-edge: #d4b467;
+  --slate: #2c3640;
+  --slate-soft: #4d5862;
+  --ochre: #a8863b;
+  --umber: #7e5228;
+  --umber-deep: #67431f;
+  --mist: #9fb2be;
+  --paper: #f3f5f2;
+
+  --measure: 36rem;
+  --page: 70rem;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--wall);
+  color: var(--slate);
+  font-family: Overpass, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--umber); text-underline-offset: 0.18em; }
+a:hover { color: var(--slate); }
+
+:focus-visible {
+  outline: 3px solid var(--umber);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+h1, h2, h3 {
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+h2 { font-size: clamp(1.75rem, 3.2vw, 2.4rem); margin-bottom: 1.25rem; }
+h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+
+p { margin: 0 0 1rem; }
+
+/* ---------- Bar ---------- */
+
+.bar {
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 1.5rem var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--slate);
+  text-decoration: none;
+}
+
+.mark img { width: 32px; height: 32px; border-radius: 8px; }
+
+.bar-cta {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--slate);
+}
+
+/* ---------- Sections ---------- */
+
+main > section {
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: clamp(2.75rem, 6vw, 4.75rem) var(--gutter);
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+
+main > .hero { padding-top: clamp(2rem, 5vw, 4rem); }
+
+.hero h1 {
+  font-size: clamp(2.4rem, 5.4vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.5rem;
+  max-width: 14ch;
+}
+
+.lede {
+  font-size: 1.25rem;
+  color: var(--slate-soft);
+  max-width: 32rem;
+}
+
+.buy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin-top: 2rem;
+}
+
+.button {
+  display: inline-block;
+  background: var(--slate);
+  color: var(--paper);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.85rem 1.4rem 0.75rem;
+  border-radius: 6px;
+}
+
+.button:hover { background: var(--umber); color: var(--paper); }
+
+.price { font-size: 0.95rem; color: var(--slate-soft); }
+
+/* ---------- Ticket ---------- */
+
+.ticket {
+  --notch: 14px;
+  margin: 0;
+  justify-self: center;
+  width: min(100%, 22rem);
+  transform: rotate(2deg);
+  filter: drop-shadow(0 18px 24px rgba(44, 54, 64, 0.18)) drop-shadow(0 2px 3px rgba(44, 54, 64, 0.2));
+}
+
+/* The dispenser mouth the ticket comes out of. */
+.ticket-slot {
+  height: 14px;
+  margin: 0 -0.75rem -7px;
+  border-radius: 7px;
+  background: var(--slate);
+  box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.45);
+  position: relative;
+  z-index: 1;
+}
+
+.ticket-paper {
+  animation: dispense 0.9s cubic-bezier(.3, .7, .2, 1) 0.15s both;
+}
+
+@keyframes dispense {
+  from { transform: translateY(-62%); clip-path: inset(62% 0 0 0); }
+  to { transform: none; clip-path: inset(-20px -20px -20px -20px); }
+}
+
+.ticket-body { position: relative; }
+
+/* The rubber stamp that lands when a wait is stopped. */
+.ticket-stamp {
+  position: absolute;
+  right: 1.1rem;
+  top: 3.6rem;
+  margin: 0;
+  padding: 0.3rem 0.7rem 0.15rem;
+  border: 3px solid var(--umber-deep);
+  border-radius: 6px;
+  color: var(--umber-deep);
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transform: rotate(-11deg);
+  opacity: 0.88;
+  mix-blend-mode: multiply;
+}
+
+.ticket-stamp.is-landing { animation: stamp 0.28s cubic-bezier(.5, 0, .7, .4) both; }
+
+@keyframes stamp {
+  from { transform: rotate(-4deg) scale(1.9); opacity: 0; }
+  70% { opacity: 0.95; }
+  to { transform: rotate(-11deg) scale(1); opacity: 0.88; }
+}
+
+.ticket-body,
+.ticket-stub {
+  background: var(--ticket);
+  padding: 1.75rem 1.75rem 1.5rem;
+}
+
+.ticket-body {
+  border-radius: 10px 10px 0 0;
+  -webkit-mask: radial-gradient(circle var(--notch) at 0 100%, transparent 98%, #000) left / 51% 100% no-repeat,
+                radial-gradient(circle var(--notch) at 100% 100%, transparent 98%, #000) right / 51% 100% no-repeat;
+          mask: radial-gradient(circle var(--notch) at 0 100%, transparent 98%, #000) left / 51% 100% no-repeat,
+                radial-gradient(circle var(--notch) at 100% 100%, transparent 98%, #000) right / 51% 100% no-repeat;
+}
+
+.ticket-stub {
+  border-radius: 0 0 10px 10px;
+  border-top: 2px dashed var(--ticket-edge);
+  padding-top: 1.4rem;
+  -webkit-mask: radial-gradient(circle var(--notch) at 0 0, transparent 98%, #000) left / 51% 100% no-repeat,
+                radial-gradient(circle var(--notch) at 100% 0, transparent 98%, #000) right / 51% 100% no-repeat;
+          mask: radial-gradient(circle var(--notch) at 0 0, transparent 98%, #000) left / 51% 100% no-repeat,
+                radial-gradient(circle var(--notch) at 100% 0, transparent 98%, #000) right / 51% 100% no-repeat;
+}
+
+.ticket-issuer {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--umber-deep);
+  margin-bottom: 1.5rem;
+}
+
+.ticket-state { font-weight: 600; margin: 0; }
+
+.ticket-time {
+  font-weight: 800;
+  font-size: clamp(4.5rem, 11vw, 6.5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin: 0.3rem 0 0.4rem;
+  color: var(--slate);
+}
+
+.ticket-since { color: var(--umber-deep); margin: 0; }
+
+.ticket-button {
+  font: inherit;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--ticket);
+  background: var(--slate);
+  border: 0;
+  border-radius: 999px;
+  padding: 0.7rem 1.3rem 0.6rem;
+  cursor: pointer;
+}
+
+.ticket-button:hover { background: var(--umber); }
+
+.ticket-note {
+  font-size: 0.95rem;
+  line-height: 1.45;
+  margin: 0.9rem 0 0;
+  color: var(--slate-soft);
+}
+
+/* ---------- Ledger ---------- */
+
+.ledger-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.ledger-copy p { max-width: var(--measure); }
+
+.ledger {
+  margin: 0;
+  background: var(--paper);
+  padding: 1.75rem clamp(1.25rem, 3vw, 2rem) 1.25rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 0 var(--wall-deep), 0 10px 30px rgba(44, 54, 64, 0.08);
+}
+
+.ledger figcaption {
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.ledger ol { list-style: none; margin: 0; padding: 0; }
+
+.ledger li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  font-size: 1.15rem;
+}
+
+.ledger li:first-child { font-weight: 800; font-size: 1.4rem; }
+
+.ledger .dots {
+  flex: 1;
+  border-bottom: 2px dotted var(--mist);
+  transform: translateY(-0.3em);
+}
+
+.ledger .unnamed { color: var(--slate-soft); }
+
+.ledger-total {
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px solid var(--slate);
+  margin: 0.75rem 0 0;
+  padding-top: 0.75rem;
+  font-weight: 800;
+}
+
+/* ---------- Capture ---------- */
+
+.capture-copy { max-width: var(--measure); }
+
+.shots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 2.5rem);
+  margin-top: 3rem;
+}
+
+.shots figure { margin: 0; }
+
+.shots img {
+  border-radius: 28px;
+  box-shadow: 0 12px 30px rgba(44, 54, 64, 0.16);
+}
+
+.shots figcaption {
+  margin-top: 0.9rem;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* ---------- Wrist ---------- */
+
+.wrist {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.wrist-copy p { max-width: var(--measure); }
+
+.watch-shots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.watch-shots img { border-radius: 30%/25%; }
+
+/* ---------- Unfold ---------- */
+
+.unfold p { max-width: 42rem; }
+
+.duo-frame {
+  --bezel: 10px;
+  position: relative;
+  margin-top: 2.5rem;
+  perspective: 2200px;
+}
+
+.duo {
+  border-radius: 22px;
+  border: var(--bezel) solid var(--slate);
+  box-shadow: 0 20px 50px rgba(44, 54, 64, 0.2);
+}
+
+
+/* The fold. Two halves of the same screenshot stand in for the image while
+   it opens, hinged at the centre, then hand back to the real image. */
+.duo-half {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  border: var(--bezel) solid var(--slate);
+  background-size: 200% 100%;
+  background-origin: padding-box;
+  background-clip: padding-box;
+  transition: transform 1.2s cubic-bezier(.25, .7, .2, 1), filter 1.2s ease;
+  display: none;
+}
+
+.duo-half--left {
+  left: 0;
+  border-right: 0;
+  border-radius: 22px 0 0 22px;
+  background-position: left center;
+  transform-origin: right center;
+}
+
+.duo-half--right {
+  right: 0;
+  border-left: 0;
+  border-radius: 0 22px 22px 0;
+  background-position: right center;
+  transform-origin: left center;
+}
+
+.duo-frame.is-folded .duo,
+.duo-frame.is-opening .duo { visibility: hidden; }
+
+.duo-frame.is-folded .duo-half,
+.duo-frame.is-opening .duo-half { display: block; }
+
+.duo-frame.is-folded .duo-half--left { transform: rotateY(38deg); filter: brightness(0.86); }
+.duo-frame.is-folded .duo-half--right { transform: rotateY(-38deg); filter: brightness(0.94); }
+
+/* ---------- Notice ---------- */
+
+.notice {
+  position: relative;
+  max-width: 44rem;
+  margin: 0 auto;
+  background: var(--paper);
+  border: 3px solid var(--slate);
+  outline: 1px solid var(--slate);
+  outline-offset: -10px;
+  padding: clamp(2rem, 5vw, 3rem);
+}
+
+.notice::before,
+.notice::after {
+  content: "";
+  position: absolute;
+  top: 18px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--mist);
+  box-shadow: inset 0 0 0 2px var(--slate-soft);
+}
+
+.notice::before { left: 18px; }
+.notice::after { right: 18px; }
+
+.notice h2 { text-align: center; }
+
+.notice ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 2 14rem;
+  column-gap: 2.5rem;
+}
+
+.notice li {
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--wall-deep);
+  break-inside: avoid;
+  font-weight: 600;
+}
+
+/* ---------- Yours ---------- */
+
+.yours p { max-width: var(--measure); }
+
+/* ---------- Footer ---------- */
+
+.foot {
+  background: var(--slate);
+  color: var(--wall);
+  margin-top: clamp(2rem, 5vw, 4rem);
+}
+
+.foot-inner {
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 2.5rem var(--gutter) 3rem;
+}
+
+.foot nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-bottom: 1rem; font-weight: 600; }
+.foot a { color: var(--ticket); }
+.foot a:hover { color: var(--paper); }
+.foot p { font-size: 0.95rem; color: var(--mist); margin: 0; max-width: var(--measure); }
+
+/* ---------- Document pages: privacy, support, event ---------- */
+
+.doc {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 4rem) var(--gutter) clamp(4rem, 8vw, 6rem);
+}
+
+.doc h1 {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+}
+
+.doc h2 { font-size: 1.6rem; margin: 3rem 0 0.9rem; }
+.doc h3 { margin-top: 1.75rem; }
+.doc .updated { color: var(--slate-soft); font-size: 1rem; }
+.doc ul { padding-left: 1.2rem; }
+.doc li { margin-bottom: 0.4rem; }
+
+.doc .panel {
+  background: var(--paper);
+  border-radius: 4px;
+  padding: 1.5rem 1.75rem;
+  margin: 2rem 0;
+}
+
+.doc .panel p:last-child { margin-bottom: 0; }
+
+.doc details {
+  border-bottom: 1px solid var(--wall-deep);
+  padding: 1rem 0;
+}
+
+.doc summary {
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.doc details p { margin: 0.75rem 0 0; }
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 52rem) {
+  .hero,
+  .ledger-section,
+  .wrist { grid-template-columns: minmax(0, 1fr); }
+
+  .ticket { transform: rotate(1deg); width: min(100%, 20rem); }
+
+  .shots { grid-template-columns: repeat(3, minmax(9rem, 1fr)); overflow-x: auto; padding-bottom: 1rem; }
+  .shots img { border-radius: 18px; }
+
+  .duo-frame { --bezel: 6px; }
+  .duo { border-radius: 14px; }
+  .duo-half--left { border-radius: 14px 0 0 14px; }
+  .duo-half--right { border-radius: 0 14px 14px 0; }
+
+  .bar-cta { font-size: 0.95rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticket { transform: none; }
+  .ticket-paper { animation: none; }
+}
+
+.doc .lede { margin-top: 1.25rem; }
+.doc .duo { margin: 2rem 0 0.5rem; }
+.doc section h2 { margin-top: 2.75rem; }
+main.doc > section { padding: 0; max-width: none; margin: 0; }
+
+/* Keeps the shadow under the halves so nothing pops when the real image
+   takes over. */
+.duo-frame.is-folded,
+.duo-frame.is-opening { filter: drop-shadow(0 20px 25px rgba(44, 54, 64, 0.2)); }
+
+:root { color-scheme: light; }
+</style>
+
 
 <header class="bar">
   <a class="mark" href="/">
-    <img src="/apple-touch-icon.png" alt="" width="32" height="32">
+    <img src="apple-touch-icon.png" alt="" width="32" height="32">
     Moratine
   </a>
   <a class="bar-cta" href="https://apps.apple.com/us/app/moratine/id6808066631" rel="noopener">Get it for $4.99</a>
@@ -50,15 +612,19 @@
     </div>
 
     <figure class="ticket" aria-labelledby="ticket-state">
+      <div class="ticket-slot" aria-hidden="true"></div>
+      <div class="ticket-paper">
       <div class="ticket-body">
         <p class="ticket-issuer">Moratine</p>
         <p class="ticket-state" id="ticket-state">You have been waiting</p>
         <p class="ticket-time" id="ticket-time" aria-live="off">0:00</p>
         <p class="ticket-since" id="ticket-since">since you opened this page</p>
+        <p class="ticket-stamp" id="ticket-stamp" aria-hidden="true" hidden>Recorded</p>
       </div>
       <div class="ticket-stub">
         <button type="button" class="ticket-button" id="ticket-button">Stop the wait</button>
         <p class="ticket-note" id="ticket-note">This is how the app works. One tap in, one tap out.</p>
+      </div>
       </div>
     </figure>
   </section>
@@ -80,13 +646,13 @@
 
     <figure class="ledger">
       <figcaption>A month in Moratine</figcaption>
-      <ol>
-        <li><span class="who">Aetna</span><span class="dots" aria-hidden="true"></span><span class="how-long">2h 22m</span></li>
-        <li><span class="who">DMV</span><span class="dots" aria-hidden="true"></span><span class="how-long">1h 19m</span></li>
-        <li><span class="who">Dr. Patel</span><span class="dots" aria-hidden="true"></span><span class="how-long">1h 2m</span></li>
-        <li><span class="who">Comcast</span><span class="dots" aria-hidden="true"></span><span class="how-long">37m</span></li>
-        <li><span class="who">Chase</span><span class="dots" aria-hidden="true"></span><span class="how-long">16m</span></li>
-        <li class="unnamed"><span class="who">Unattributed</span><span class="dots" aria-hidden="true"></span><span class="how-long">1h 37m</span></li>
+      <ol id="ledger-list">
+        <li data-shuffle="2"><span class="who">Aetna</span><span class="dots" aria-hidden="true"></span><span class="how-long">2h 22m</span></li>
+        <li data-shuffle="4"><span class="who">DMV</span><span class="dots" aria-hidden="true"></span><span class="how-long">1h 19m</span></li>
+        <li data-shuffle="6"><span class="who">Dr. Patel</span><span class="dots" aria-hidden="true"></span><span class="how-long">1h 2m</span></li>
+        <li data-shuffle="1"><span class="who">Comcast</span><span class="dots" aria-hidden="true"></span><span class="how-long">37m</span></li>
+        <li data-shuffle="5"><span class="who">Chase</span><span class="dots" aria-hidden="true"></span><span class="how-long">16m</span></li>
+        <li class="unnamed" data-shuffle="3"><span class="who">Unattributed</span><span class="dots" aria-hidden="true"></span><span class="how-long">1h 37m</span></li>
       </ol>
       <p class="ledger-total"><span>Twenty waits</span><span>7h 13m</span></p>
     </figure>
@@ -108,15 +674,15 @@
     </div>
     <div class="shots">
       <figure>
-        <img src="/images/02.png" alt="A wait in progress in the Moratine app, two minutes elapsed, with a Stop button." width="1320" height="2868" loading="lazy">
+        <img src="images/02.png" alt="A wait in progress in the Moratine app, two minutes elapsed, with a Stop button." width="1320" height="2868" loading="lazy">
         <figcaption>In the app</figcaption>
       </figure>
       <figure>
-        <img src="/images/07.png" alt="The Moratine control in iOS Control Center, showing a waiting state." width="1320" height="2868" loading="lazy">
+        <img src="images/07.png" alt="The Moratine control in iOS Control Center, showing a waiting state." width="1320" height="2868" loading="lazy">
         <figcaption>From Control Center</figcaption>
       </figure>
       <figure>
-        <img src="/images/01.png" alt="The Moratine home screen: seven hours thirteen minutes this month, with the ledger of counterparties below." width="1320" height="2868" loading="lazy">
+        <img src="images/01.png" alt="The Moratine home screen: seven hours thirteen minutes this month, with the ledger of counterparties below." width="1320" height="2868" loading="lazy">
         <figcaption>The month so far</figcaption>
       </figure>
     </div>
@@ -133,9 +699,9 @@
       </p>
     </div>
     <div class="watch-shots">
-      <img src="/images/w1.png" alt="The Moratine watch app at rest, showing tap to start." width="422" height="514" loading="lazy">
-      <img src="/images/w2.png" alt="A watch face with the Moratine complication showing a running wait." width="422" height="514" loading="lazy">
-      <img src="/images/w3.png" alt="The Moratine card in the watch Smart Stack, showing a running wait and a stop button." width="422" height="514" loading="lazy">
+      <img src="images/w1.png" alt="The Moratine watch app at rest, showing tap to start." width="422" height="514" loading="lazy">
+      <img src="images/w2.png" alt="A watch face with the Moratine complication showing a running wait." width="422" height="514" loading="lazy">
+      <img src="images/w3.png" alt="The Moratine card in the watch Smart Stack, showing a running wait and a stop button." width="422" height="514" loading="lazy">
     </div>
   </section>
 
@@ -148,7 +714,9 @@
       Moratine you know and unfolded is the two-pane view, and a wait you are
       editing stays open when you fold or unfold.
     </p>
-    <img class="duo" src="/images/duo.png" alt="Moratine on the unfolded iPhone Duo: a one-minute wait running on the left, the week's history on the right." width="1600" height="1125" loading="lazy">
+    <div class="duo-frame" id="duo-frame">
+      <img class="duo" src="images/duo.png" alt="Moratine on the unfolded iPhone Duo: a one-minute wait running on the left, the week's history on the right." width="1600" height="1125" loading="lazy">
+    </div>
   </section>
 
   <section class="notice-section">
@@ -239,7 +807,76 @@
     button.addEventListener('click', function () { timer ? stop() : run(); });
     run();
   })();
+
+  // Three small movements, each acting out something the app does. All are
+  // skipped when the reader prefers reduced motion; the page reads the same
+  // without them.
+  (function () {
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var stamp = document.getElementById('ticket-stamp');
+    var button = document.getElementById('ticket-button');
+
+    // The stamp lands when a wait is stopped and lifts when a new one starts.
+    button.addEventListener('click', function () {
+      var stopping = stamp.hidden;
+      stamp.hidden = !stopping;
+      if (stopping && !still) {
+        stamp.classList.remove('is-landing');
+        void stamp.offsetWidth;
+        stamp.classList.add('is-landing');
+      }
+    });
+
+    if (still || !('IntersectionObserver' in window)) return;
+
+    function once(el, threshold, fn) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { io.disconnect(); fn(); }
+      }, { threshold: threshold });
+      io.observe(el);
+    }
+
+    // The ledger arrives in the order waits were recorded, then sorts itself
+    // so the leader is first, the way the app keeps it.
+    var list = document.getElementById('ledger-list');
+    var sorted = Array.prototype.slice.call(list.children);
+    sorted.slice().sort(function (a, b) { return a.dataset.shuffle - b.dataset.shuffle; })
+      .forEach(function (li) { list.appendChild(li); });
+    once(list, 0.6, function () {
+      setTimeout(function () {
+        var before = new Map();
+        sorted.forEach(function (li) { before.set(li, li.getBoundingClientRect().top); });
+        sorted.forEach(function (li) { list.appendChild(li); });
+        sorted.forEach(function (li) {
+          var dy = before.get(li) - li.getBoundingClientRect().top;
+          if (!dy) return;
+          li.animate([{ transform: 'translateY(' + dy + 'px)' }, { transform: 'none' }],
+            { duration: 700, easing: 'cubic-bezier(.2,.7,.2,1)' });
+        });
+      }, 450);
+    });
+
+    // The Duo screenshot opens from half folded, like the device.
+    var frame = document.getElementById('duo-frame');
+    var img = frame.querySelector('img');
+    var src = img.currentSrc || img.src;
+    ['left', 'right'].forEach(function (side) {
+      var half = document.createElement('div');
+      half.className = 'duo-half duo-half--' + side;
+      half.style.backgroundImage = 'url("' + src + '")';
+      half.setAttribute('aria-hidden', 'true');
+      frame.appendChild(half);
+    });
+    frame.classList.add('is-folded');
+    once(frame, 0.35, function () {
+      requestAnimationFrame(function () {
+        frame.classList.add('is-opening');
+        frame.classList.remove('is-folded');
+        setTimeout(function () { frame.classList.remove('is-opening'); frame.classList.add('is-open'); }, 1300);
+      });
+    });
+  })();
 </script>
 
-</body>
-</html>
+
+</body></html>
