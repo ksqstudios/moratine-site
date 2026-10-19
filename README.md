@@ -18,10 +18,10 @@ Static HTML and CSS, deployed via Cloudflare Pages with GitHub auto-deploy.
 
 ## Fonts
 
-Fraunces, IBM Plex Mono and Inter load from Google Fonts in each page head,
-matching the other sites. Fraunces is used for the wordmark, headings and the
-two gradient card figures only; Plex Mono carries eyebrows; Inter does
-everything else.
+Overpass is the only typeface, loaded from Google Fonts in each page head
+(weights 400, 600 and 800). It comes from the Highway Gothic signage
+lineage, which suits a site built as a waiting room: a take-a-number ticket,
+a ledger like a posted fee schedule, and a posted notice.
 
 ## Assets to drop in
 

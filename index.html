@@ -10,165 +10,236 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://moratine.app/">
 <meta property="og:title" content="Moratine, a record of time you did not choose">
-<meta property="og:description" content="Two hours ten minutes on hold with your insurer, across six calls. A bare total is a mood. A name attached to it is evidence.">
+<meta property="og:description" content="Two hours twenty-two minutes on hold with your insurer, across six calls. A bare total is a mood. A name attached to it is evidence.">
 <meta property="og:image" content="https://moratine.app/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#dde3e0">
 
 <link rel="icon" href="/favicon.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400&family=IBM+Plex+Mono:wght@400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 
-<div class="wrap">
+<header class="bar">
+  <a class="mark" href="/">
+    <img src="/apple-touch-icon.png" alt="" width="32" height="32">
+    Moratine
+  </a>
+  <a class="bar-cta" href="https://apps.apple.com/us/app/moratine/id6808066631" rel="noopener">Get it for $4.99</a>
+</header>
 
-  <header class="masthead">
-    <img src="/apple-touch-icon.png" alt="">
-    <a class="wordmark" href="/">Moratine</a>
-  </header>
+<main>
 
-  <div class="hero">
-    <p class="eyebrow">A record of time you did not choose</p>
-    <h1>Two hours ten minutes on hold with your insurer.</h1>
-    <p class="lede">
-      A bare total is a mood. Knowing you waited four hours this month changes
-      nothing. <strong>Naming who imposed it</strong> turns the same number
-      into something you can act on.
-    </p>
-    <a class="cta" href="https://apps.apple.com/us/app/moratine/id6808066631" rel="noopener">Download on the App Store</a>
-    <span class="price">$4.99, one time</span>
-  </div>
-
-  <div class="cards">
-    <div class="card card--ochre">
-      <p class="eyebrow">This month</p>
-      <p class="figure">7h 13m</p>
-      <p class="note">Across twenty waits, in four places you did not choose to be.</p>
+  <section class="hero">
+    <div class="hero-copy">
+      <h1>Two hours twenty-two minutes on hold with your insurer.</h1>
+      <p class="lede">
+        A bare total is a mood. Knowing you waited seven hours this month
+        changes nothing. Naming who imposed it turns the same number into
+        something you can act on.
+      </p>
+      <p class="buy">
+        <a class="button" href="https://apps.apple.com/us/app/moratine/id6808066631" rel="noopener">Download on the App Store</a>
+        <span class="price">$4.99, one time. iPhone, iPad and Apple Watch.</span>
+      </p>
     </div>
-    <div class="card card--mist">
-      <p class="eyebrow">Most of it</p>
-      <p class="figure">2h 22m</p>
-      <p class="note">One insurer, six calls. That sentence is the whole app.</p>
-    </div>
-  </div>
 
-  <section>
+    <figure class="ticket" aria-labelledby="ticket-state">
+      <div class="ticket-body">
+        <p class="ticket-issuer">Moratine</p>
+        <p class="ticket-state" id="ticket-state">You have been waiting</p>
+        <p class="ticket-time" id="ticket-time" aria-live="off">0:00</p>
+        <p class="ticket-since" id="ticket-since">since you opened this page</p>
+      </div>
+      <div class="ticket-stub">
+        <button type="button" class="ticket-button" id="ticket-button">Stop the wait</button>
+        <p class="ticket-note" id="ticket-note">This is how the app works. One tap in, one tap out.</p>
+      </div>
+    </figure>
+  </section>
+
+  <section class="ledger-section">
+    <div class="ledger-copy">
+      <h2>Say who later, or never</h2>
+      <p>
+        Naming the counterparty is optional and happens after the fact, when
+        you have the patience for it. Unnamed waits still count toward your
+        total. Named ones add up into a ledger: who is costing you what,
+        sorted, so the leader is the first thing you see.
+      </p>
+      <p>
+        An honest record does not require you to do bookkeeping in a waiting
+        room.
+      </p>
+    </div>
+
+    <figure class="ledger">
+      <figcaption>A month in Moratine</figcaption>
+      <ol>
+        <li><span class="who">Aetna</span><span class="dots" aria-hidden="true"></span><span class="how-long">2h 22m</span></li>
+        <li><span class="who">DMV</span><span class="dots" aria-hidden="true"></span><span class="how-long">1h 19m</span></li>
+        <li><span class="who">Dr. Patel</span><span class="dots" aria-hidden="true"></span><span class="how-long">1h 2m</span></li>
+        <li><span class="who">Comcast</span><span class="dots" aria-hidden="true"></span><span class="how-long">37m</span></li>
+        <li><span class="who">Chase</span><span class="dots" aria-hidden="true"></span><span class="how-long">16m</span></li>
+        <li class="unnamed"><span class="who">Unattributed</span><span class="dots" aria-hidden="true"></span><span class="how-long">1h 37m</span></li>
+      </ol>
+      <p class="ledger-total"><span>Twenty waits</span><span>7h 13m</span></p>
+    </figure>
+  </section>
+
+  <section class="capture">
     <h2>One tap in, one tap out</h2>
-    <p class="prose">
-      The moment you are put on hold is a bad time to use an app. Capture is a
-      single tap from wherever you already are: a Control Center control, a
-      complication or Smart Stack button on Apple Watch, a home screen or lock
-      screen widget, or the app itself.
-    </p>
-    <p class="prose">
-      Nothing to categorize, nothing to fill in. Start it when the wait begins
-      and stop it when it ends.
-    </p>
+    <div class="capture-copy">
+      <p>
+        The moment you are put on hold is a bad time to use an app. Capture is
+        a single tap from wherever you already are: a Control Center control,
+        a complication or Smart Stack button on Apple Watch, a home screen or
+        lock screen widget, or the app itself.
+      </p>
+      <p>
+        Nothing to categorize, nothing to fill in. Start it when the wait
+        begins and stop it when it ends.
+      </p>
+    </div>
     <div class="shots">
-      <img src="/images/01.png" alt="The Moratine home screen showing seven hours thirteen minutes of waiting this month, with a ledger of counterparties below.">
-      <img src="/images/02.png" alt="A wait in progress, showing two minutes elapsed and a stop button.">
-      <img src="/images/07.png" alt="The Moratine control in iOS Control Center, showing a waiting state.">
+      <figure>
+        <img src="/images/02.png" alt="A wait in progress in the Moratine app, two minutes elapsed, with a Stop button." width="1320" height="2868" loading="lazy">
+        <figcaption>In the app</figcaption>
+      </figure>
+      <figure>
+        <img src="/images/07.png" alt="The Moratine control in iOS Control Center, showing a waiting state." width="1320" height="2868" loading="lazy">
+        <figcaption>From Control Center</figcaption>
+      </figure>
+      <figure>
+        <img src="/images/01.png" alt="The Moratine home screen: seven hours thirteen minutes this month, with the ledger of counterparties below." width="1320" height="2868" loading="lazy">
+        <figcaption>The month so far</figcaption>
+      </figure>
     </div>
   </section>
 
-  <section>
-    <h2>Say who later, or never</h2>
-    <p class="prose">
-      Naming the counterparty is optional and happens after the fact, when you
-      have the patience for it. Unnamed waits still count toward your total.
-      Named ones add up into a ledger: who is costing you what, sorted, so the
-      leader is the first thing you see.
-    </p>
-    <p class="prose">
-      An honest record does not require you to do bookkeeping in a waiting
-      room.
-    </p>
-    <div class="shots">
-      <img src="/images/03.png" alt="The attribution sheet, listing recent counterparties to name a wait after the fact.">
-      <img src="/images/04.png" alt="A counterparty detail screen showing two hours twenty two minutes with one insurer this month.">
-      <img src="/images/05.png" alt="History, showing every wait grouped by week and day.">
+  <section class="wrist">
+    <div class="wrist-copy">
+      <h2>On your wrist, without your phone</h2>
+      <p>
+        The Apple Watch app records on its own and hands completed waits to
+        your phone when it can, so a wait recorded in a basement waiting room
+        is not lost. A complication shows whether one is running; the Smart
+        Stack starts and stops it.
+      </p>
+    </div>
+    <div class="watch-shots">
+      <img src="/images/w1.png" alt="The Moratine watch app at rest, showing tap to start." width="422" height="514" loading="lazy">
+      <img src="/images/w2.png" alt="A watch face with the Moratine complication showing a running wait." width="422" height="514" loading="lazy">
+      <img src="/images/w3.png" alt="The Moratine card in the watch Smart Stack, showing a running wait and a stop button." width="422" height="514" loading="lazy">
     </div>
   </section>
 
-  <section>
-    <h2>On your wrist, without your phone</h2>
-    <p class="prose">
-      The Apple Watch app records on its own and hands completed waits to your
-      phone when it can, so a wait recorded in a basement waiting room is not
-      lost. A complication shows whether one is running; the Smart Stack
-      starts and stops it.
-    </p>
-    <div class="shots shots--watch">
-      <img src="/images/w1.png" alt="The Moratine watch app at rest, showing tap to start.">
-      <img src="/images/w2.png" alt="A watch face with the Moratine complication showing a running wait.">
-      <img src="/images/w3.png" alt="The Moratine card in the watch Smart Stack, showing a running wait and a stop button.">
-    </div>
-  </section>
-
-  <section>
+  <section class="unfold">
     <h2>Side by side on iPad and iPhone Duo</h2>
-    <p class="prose">
+    <p>
       With room to spare, Home and History open together: the wait in
       progress on one side, every wait before it on the other. Stop a wait
-      and it lands in the list beside you.
+      and it lands in the list beside you. On iPhone Duo, folded is the
+      Moratine you know and unfolded is the two-pane view, and a wait you are
+      editing stays open when you fold or unfold.
     </p>
-    <p class="prose">
-      On iPhone Duo, folded is the Moratine you know and unfolded is the
-      two-pane view. A wait you are editing stays open when you fold or
-      unfold.
-    </p>
+    <img class="duo" src="/images/duo.png" alt="Moratine on the unfolded iPhone Duo: a one-minute wait running on the left, the week's history on the right." width="1600" height="1125" loading="lazy">
   </section>
 
-  <section class="refusals">
-    <h2>What it does not do</h2>
-    <ul>
-      <li>No streaks</li>
-      <li>No scores or grades</li>
-      <li>No coaching</li>
-      <li>No advice about waiting better</li>
-      <li>No location tracking</li>
-      <li>No motion detection</li>
-      <li>No listening for calls</li>
-      <li>No automatic guessing</li>
-      <li>No account</li>
-      <li>No analytics</li>
-      <li>No subscription</li>
-      <li>No ads</li>
-    </ul>
+  <section class="notice-section">
+    <div class="notice">
+      <h2>What it does not do</h2>
+      <ul>
+        <li>No streaks</li>
+        <li>No scores or grades</li>
+        <li>No coaching</li>
+        <li>No advice about waiting better</li>
+        <li>No location tracking</li>
+        <li>No motion detection</li>
+        <li>No listening for calls</li>
+        <li>No automatic guessing</li>
+        <li>No account</li>
+        <li>No analytics</li>
+        <li>No subscription</li>
+        <li>No ads</li>
+      </ul>
+    </div>
   </section>
 
-  <section>
+  <section class="yours">
     <h2>Yours, and nobody else's</h2>
-    <p class="prose">
+    <p>
       Everything stays on your device. There is no account, no tracking, and
       no server to send anything to. Full JSON export is built in: every wait,
-      every counterparty, readable without this app.
+      every counterparty, readable without this app. One purchase, no
+      subscription.
     </p>
-    <p class="prose">
-      One purchase, no subscription.
-    </p>
-    <p>
-      <a class="cta" href="https://apps.apple.com/us/app/moratine/id6808066631" rel="noopener">Download on the App Store</a>
-      <span class="price">$4.99, one time</span>
+    <p class="buy">
+      <a class="button" href="https://apps.apple.com/us/app/moratine/id6808066631" rel="noopener">Download on the App Store</a>
+      <span class="price">$4.99, one time.</span>
     </p>
   </section>
 
-</div>
+</main>
 
-<footer>
-  <div class="wrap">
-    <nav>
-      <a href="/privacy">Privacy</a>
-      <a href="/support">Support</a>
-      <a href="https://ksqstudios.com">KSQ Studios</a>
-    </nav>
-    <p>Moratine is designed, built, and supported by one person, Kurt Klein, in Berwyn, Pennsylvania, under KSQ Studios. 2026.</p>
+<footer class="foot">
+  <div class="foot-inner">
+  <nav aria-label="Site">
+    <a href="/privacy">Privacy</a>
+    <a href="/support">Support</a>
+    <a href="https://ksqstudios.com">KSQ Studios</a>
+  </nav>
+  <p>Moratine is designed, built, and supported by one person, Kurt Klein, in Berwyn, Pennsylvania, under KSQ Studios. 2026.</p>
   </div>
 </footer>
+
+<script>
+  // The hero ticket counts the time since this page opened, like a wait in
+  // the app. Stop records it; Start again resets it. Nothing is stored or sent.
+  (function () {
+    var time = document.getElementById('ticket-time');
+    var state = document.getElementById('ticket-state');
+    var since = document.getElementById('ticket-since');
+    var note = document.getElementById('ticket-note');
+    var button = document.getElementById('ticket-button');
+    var start = Date.now();
+    var timer = null;
+
+    function format(ms) {
+      var s = Math.floor(ms / 1000);
+      var h = Math.floor(s / 3600);
+      var m = Math.floor((s % 3600) / 60);
+      var sec = s % 60;
+      var mm = h ? String(m).padStart(2, '0') : String(m);
+      return (h ? h + ':' : '') + mm + ':' + String(sec).padStart(2, '0');
+    }
+    function tick() { time.textContent = format(Date.now() - start); }
+    function run() {
+      start = Date.now();
+      tick();
+      timer = setInterval(tick, 1000);
+      state.textContent = 'You have been waiting';
+      since.textContent = 'since ' + new Date(start).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+      button.textContent = 'Stop the wait';
+      note.textContent = 'This is how the app works. One tap in, one tap out.';
+    }
+    function stop() {
+      clearInterval(timer);
+      timer = null;
+      tick();
+      state.textContent = 'You waited';
+      button.textContent = 'Start a new wait';
+      note.textContent = 'Recorded. Moratine would ask who it was for later, or never.';
+    }
+    button.addEventListener('click', function () { timer ? stop() : run(); });
+    run();
+  })();
+</script>
 
 </body>
 </html>
